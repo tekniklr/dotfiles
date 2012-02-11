@@ -1,0 +1,30 @@
+# set my environment
+export CLICOLOR=1
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+export EDITOR='vim'
+export HISTCONTROL='erasedups:ignorespace'
+export HISTIGNORE="cd ..:ls:su:sudo -s:exit"
+export LSCOLORS=ExFxCxDxBxegedabagacad
+export PATH="$PATH:/Users/tekniklr/bin:/Users/tekniklr/Dropbox/programs/bin:/Users/tekniklr/Dropbox/bin:/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/opt/subversion/bin"
+export PS1="\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;35m\]\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\] \\$ "
+export VIM_APP_DIR='/Applications/Programming/'
+export VISUAL='vim'
+
+# general purpose aliases
+alias rake='bundle exec rake'
+alias rails='bundle exec rails'
+alias git='/Users/tekniklr/Dropbox/programs/git_forks/git-achievements/git-achievements'
+alias pushgithub='git push -u origin master'
+alias grep='grep --color=auto -i'
+alias locate='locate -i'
+alias updatedb='sudo /usr/libexec/locate.updatedb'
+
+# directory location aliases
+alias tekrails='cd /Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com'
+alias wptheme='cd /Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com/public/wpblog/wp-content/themes/tekniklr.com'
+
+# Load RVM function
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then
+  source "$HOME/.rvm/scripts/rvm"
+  rvm default
+fi

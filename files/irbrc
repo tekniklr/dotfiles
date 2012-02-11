@@ -1,0 +1,103 @@
+# Require RubyGems by default.
+require 'rubygems'
+
+# better than .methods -> .ls
+require 'looksee'
+
+# wirble, for pretty colors
+require 'wirble'
+colors = Wirble::Colorize.colors.merge({
+  :object_class => :black,
+  :class        => :dark_gray,
+  :symbol       => :red,
+  :symbol_prefix=> :blue,
+})
+Wirble::Colorize.colors = colors
+Wirble.init
+Wirble.colorize
+
+# output in columns
+require 'hirb'
+Hirb::View.enable
+
+# awesome_print
+require 'awesome_print'
+unless IRB.version.include?('DietRB')
+  IRB::Irb.class_eval do
+    def output_value
+      ap @context.last_value, 
+        :multiline => true,
+        :plain  => false,
+        :index => true,
+        :sort_keys => true,
+        :limit => false,
+        :indent => 2,
+        :color => {
+          :args       => :gray,
+          :array      => :gray,
+          :bigdecimal => :blue,
+          :class      => :yellow,
+          :date       => :greenish,
+          :falseclass => :red,
+          :fixnum     => :blue,
+          :float      => :blue,
+          :hash       => :black,
+          :keyword    => :cyan,
+          :method     => :purpleish,
+          :nilclass   => :red,
+          :string     => :purple,
+          :struct     => :black,
+          :symbol     => :cyanish,
+          :time       => :greenish,
+          :trueclass  => :green,
+          :variable   => :cyanish
+        }
+    end
+  end
+else # MacRuby
+  IRB.formatter = Class.new(IRB::Formatter) do
+    def inspect_object(object)
+      object.ai
+    end
+  end.new
+end
+
+# Activate auto-completion.
+require 'irb/completion'
+
+# Activate sql logging
+require 'logger'
+
+IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:SAVE_HISTORY] = 1000
+IRB.conf[:EVAL_HISTORY] = 200
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-history" 
+
+# log more usefully
+if ENV.include?('RAILS_ENV')
+  if !Object.const_defined?('RAILS_DEFAULT_LOGGER')
+    require 'logger'
+    Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
+  end
+# for rails 3
+elsif defined?(Rails) && !Rails.env.nil?
+  if Rails.logger
+    Rails.logger =Logger.new(STDOUT)
+    ActiveRecord::Base.logger = Rails.logger
+  end
+end
+
+# set up the prompt
+IRB.conf[:PROMPT_MODE] = :SIMPLE if IRB.conf[:PROMPT_MODE] == :DEFAULT
+if ENV.include?('RAILS_ENV')
+  rails_env = ENV['RAILS_ENV'].downcase[0,3]
+  current_app = Dir.pwd.split('/').last
+  IRB.conf[:PROMPT] ||= {}
+  IRB.conf[:PROMPT][:RAILS] = {
+    :PROMPT_I => "#{current_app} #{rails_env}> ",
+    :PROMPT_S => "#{current_app} #{rails_env}*> ",
+    :PROMPT_C => "#{current_app} #{rails_env}?> ",
+    :RETURN   => "=> %s\n" 
+  }
+  IRB.conf[:PROMPT_MODE] = :RAILS
+end

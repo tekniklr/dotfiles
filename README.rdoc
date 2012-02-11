@@ -1,0 +1,33 @@
+= tekniklr dotfiles
+
+Inspired by absolutely everyone, but especially rbates and his dotfile repo ( https://raw.github.com/ryanb/dotfiles/master/README.rdoc ). In fact, I've copied much of his rake task.
+
+== Initial setup
+
+  git clone git://github.com/tekniklr/dotfiles ~/.dotfiles
+  cd ~/.dotfiles
+  rake install
+
+== Subsequent update
+
+  cd ~/.dotfiles
+  git pull
+  rake install # only needed if there are new files
+
+== Supporting players
+
+I have cloned .oh-my-zsh ( git://github.com/tekniklr/oh-my-zsh ), so that should also be checked out if I want a working shell.
+
+Most of the LaunchAgents I call run scripts in my dropbox. Some of those are available on git, some are system-specific backup scripts, so they aren't available.
+
+== OSX LaunchAgents
+
+LaunchAgents will be copied to ~/Library/LaunchAgents, but will need to be manually enabled:
+
+  launchctl load </path/to/file.plist>
+
+== Caveats
+
+Private files (like ssh files and gnupg files) aren't here, natch. They will have to get backed up/synced the old fashioned way.
+
+However, semi-private files are here, in erb form. The 'rake install' task will fill in the blanks for those.

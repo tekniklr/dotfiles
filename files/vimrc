@@ -1,0 +1,222 @@
+" ######################################################
+" general
+" ######################################################
+set fileencodings=utf-8,latin1
+set encoding=utf-8
+set tenc=utf-8
+set nocompatible  " Use Vim defaults (much better!)
+set bs=2    " allow backspacing over everything in insert mode
+set ai      " always set autoindenting on
+set viminfo='10,\"100,:40,%,n~/.viminfo
+set history=50    " keep 50 lines of command line history
+set ruler   " show the cursor position all the time
+"set lines=50 columns=90
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set smartindent
+inoremap # X#
+set mps+=<:>
+set display=uhex
+set modeline
+set background=light
+syntax on " syntax hilighting
+set hlsearch  " highlight last search pattern
+" set silent (no beep)
+set vb t_vb=". 
+set browsedir=buffer " Maki GUI File Open use current directory
+" Enable file type detection. 
+" Use the default filetype settings, so that mail gets 'tw' set to 72, 
+" 'cindent' is on in C files, etc. 
+filetype plugin indent on
+" use plugin mappings ?
+let no_plugin_maps=1
+" case insensitive searches
+set ignorecase
+set number
+set showbreak=↪
+" this is for vertical indenting
+set list
+set listchars=tab:\|\ ,trail:~
+" the status line
+set laststatus=2
+set statusline=%(%t%m\ %Y/%{&ff}%)\ %=\ %(%l:%c\ (%{ShowTab()})\ %p%%%)
+
+" ######################################################
+" autocommands
+" ######################################################
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+  
+  autocmd BufNewFile,BufRead  *.txt set filetype=text
+
+  autocmd BufNewFile,BufRead  *.otl set filetype=vo_base
+
+  " Also load indent files, to automatically do language-dependent indenting. 
+  autocmd FileType text,html,xhtml,tex,mail set noautoindent nosmartindent nocindent indentexpr="" indentkeys=""
+  autocmd FileType cvs,text,tex,mail,vo_base set tw=72 nonumber
+  
+  autocmd FileType vo_base set foldlevel=0 wrap
+
+  autocmd FileType php set noexpandtab
+  autocmd FileType perl set noexpandtab
+
+  autocmd FileType ruby set expandtab
+
+  " different filetypes have different comment styles
+  au FileType haskell,vhdl,ada let b:comment_leader = '-- '
+  au FileType vim let b:comment_leader = '" '
+  au FileType c,cpp,java let b:comment_leader = '// '
+  au FileType sh,make,perl,php,python,ruby,rails,yaml,txt let b:comment_leader = '# '
+  au FileType sh,make,perl,php,python,ruby,rails,yaml,txt let b:comment = '#'
+  au FileType tex let b:comment_leader = '% '
+  au FileType tex let b:comment = '%'
+
+  augroup gzip
+    " Remove all gzip autocommands
+    au!
+
+    " Enable editing of gzipped files
+    " read: set binary mode before reading the file
+    " uncompress text in buffer after reading
+    " write:  compress file after writing
+    " append: uncompress file, append, compress file
+    autocmd BufReadPre,FileReadPre  *.gz set bin
+    autocmd BufReadPost,FileReadPost  *.gz let ch_save = &ch|set ch=2
+    autocmd BufReadPost,FileReadPost  *.gz '[,']!gunzip
+    autocmd BufReadPost,FileReadPost  *.gz set nobin
+    autocmd BufReadPost,FileReadPost  *.gz let &ch = ch_save|unlet ch_save
+    autocmd BufReadPost,FileReadPost  *.gz execute ":doautocmd BufReadPost " . expand("%:r")
+
+    autocmd BufWritePost,FileWritePost  *.gz !mv <afile> <afile>:r
+    autocmd BufWritePost,FileWritePost  *.gz !gzip <afile>:r
+
+    autocmd FileAppendPre     *.gz !gunzip <afile>
+    autocmd FileAppendPre     *.gz !mv <afile>:r <afile>
+    autocmd FileAppendPost    *.gz !mv <afile> <afile>:r
+    autocmd FileAppendPost    *.gz !gzip <afile>:r
+  augroup END
+
+  " When editing a file, always jump to the last cursor position
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  " DF - Also do not do this if the file resides in the $TEMP directory,
+  "      chances are it is a different file with the same name.
+  " This comes from the $VIMRUNTIME/vimrc_example.vim file
+  autocmd BufReadPost *
+    \ if expand("<afile>:p:h") !=? $TEMP |
+    \   if line("'\"") > 1 && line("'\"") <= line("$") |
+    \     let JumpCursorOnEdit_foo = line("'\"") |
+    \     let b:doopenfold = 1 |
+    \     if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
+    \       let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
+    \       let b:doopenfold = 2 |
+    \     endif |
+    \     exe JumpCursorOnEdit_foo |
+    \   endif |
+    \ endif
+  " Need to postpone using "zv" until after reading the modelines.
+  autocmd BufWinEnter *
+    \ if exists("b:doopenfold") |
+    \   exe "normal zv" |
+    \   if(b:doopenfold > 1) |
+    \     exe  "+".1 |
+    \   endif |
+    \   unlet b:doopenfold |
+    \ endif
+
+  " for app-vim/latexSuite
+  autocmd FileType tex let no_plugin_maps=0
+  set grepprg=grep\ -nH\ $*
+
+endif
+
+" ######################################################
+" spell-checking
+" ######################################################
+let spell_auto_type="tex,mail,text,cvs"
+
+" ######################################################
+" taglist
+" ######################################################
+"set Tlist_Ctags_Cmd="exuberant-ctags"
+let Tlist_Inc_Winwidth=0
+nnoremap <silent> <F3> :Tlist<CR>
+" to switch between windows
+nnoremap <silent> <ESC><Up> :wincmd k<CR>
+nnoremap <silent> <ESC><Down> :wincmd j<CR>
+nnoremap <silent> <ESC><Left> :wincmd h<CR>
+nnoremap <silent> <ESC><Right> :wincmd l<CR>
+
+" ######################################################
+" closetag
+" ######################################################
+let b:closetag_html_style=1
+" ctrl-_ to close tags
+
+" ######################################################
+" general keybindings
+" ######################################################
+" Don't use Ex mode, use Q for formatting
+map Q gq
+" some extra commands for HTML editing
+nmap ,mh wbgueyei<<ESC>ea></<ESC>pa><ESC>bba
+nmap ,h1 _i<h1><ESC>A</h1><ESC>
+nmap ,h2 _i<h2><ESC>A</h2><ESC>
+nmap ,h3 _i<h3><ESC>A</h3><ESC>
+nmap ,h4 _i<h4><ESC>A</h4><ESC>
+nmap ,h5 _i<h5><ESC>A</h5><ESC>
+nmap ,h6 _i<h6><ESC>A</h6><ESC>
+nmap ,hd wbi<div><ESC>ea</div><ESC>bb
+nmap ,he wbi<em><ESC>ea</em><ESC>bb
+nmap ,hi wbi<i><ESC>ea</i><ESC>bb
+nmap ,hu wbi<u><ESC>ea</i><ESC>bb
+nmap ,hs wbi<strong><ESC>ea</strong><ESC>bb
+" create a horizontal rule at the current position
+map ,br i<C-R>=escape(b:comment,'\/')<cr><ESC>76.i<CR><END><ESC>
+" Underline the current line with dashes
+map ,ud Yp:s/./-/g<CR>:let @/=""<CR>
+" Underline the current line with hashes
+map ,uh Yp:s/./#/g<CR>:let @/=""<CR>
+" convert \r (^M) to \n
+map ,rn <ESC>:%s///g<CR>
+" delete \r (^M)
+map ,rx <ESC>:%s///g<CR>
+set pastetoggle=<F2>
+nmap <down> gj
+nmap <up> gk
+" rot13 all text in the current buffer
+map <F12> <ESC>ggVGg?
+" fix all indenting in the current file
+map <F4> <ESC>1G=G
+" mapping to comment/uncomment a region in visual mode
+noremap <silent> ,c :<C-B>sil <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:noh<CR>
+noremap <silent> ,u :<C-B>sil <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:noh<CR>
+
+" mapping to hilight all required text input in unix command notation
+map ,< <ESC>/<[ a-zA-Z0-9]\+><CR>
+
+" change indentation level of selected text in normal mode
+nmap <C-Tab> a<C-t><Esc>
+nmap <C-S-Tab> a<C-d><Esc>
+" change indentation level of selected text in insert mode
+imap <C-Tab> <C-t>
+imap <C-S-Tab> <C-d>
+" change indentation level of selected text in visual mode
+vmap <Tab> :><CR>gv
+vmap <S-Tab> :<<CR>gv
+
+" ######################################################
+" functions
+" ######################################################
+
+fu ShowTab()
+  return (indent('.') / &ts )
+endf
+
+" ######################################################
+" colors
+" ######################################################
+
+colorscheme mycolors
