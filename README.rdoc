@@ -1,6 +1,6 @@
 = tekniklr dotfiles
 
-Inspired by absolutely everyone, but especially rbates and his dotfile repo ( https://raw.github.com/ryanb/dotfiles/master/README.rdoc ). In fact, I've copied much of his rake task.
+Inspired by absolutely everyone, but especially ryanb and his dotfile repo ( https://raw.github.com/ryanb/dotfiles/master/README.rdoc ). In fact, I've copied much of his rake task.
 
 == Initial setup
 
@@ -16,7 +16,7 @@ Inspired by absolutely everyone, but especially rbates and his dotfile repo ( ht
 
 == Supporting players
 
-I have cloned .oh-my-zsh ( git://github.com/tekniklr/oh-my-zsh ), so that should also be checked out if I want a working shell.
+I have cloned .oh-my-zsh ( https://github.com/tekniklr/oh-my-zsh ), so that should also be checked out for a working shell.
 
 Most of the LaunchAgents I call run scripts in my dropbox. Some of those are available on git, some are system-specific backup scripts, so they aren't available.
 
