@@ -6,6 +6,9 @@ Inspired by absolutely everyone, but especially ryanb and his dotfile repo ( htt
 
   git clone git://github.com/tekniklr/dotfiles ~/.dotfiles
   cd ~/.dotfiles
+  
+Remove any files (LaunchAgents, etc) not applicable to the current system. Just make sure to not commit the deletions.
+  
   rake install
 
 == Subsequent update
@@ -25,6 +28,8 @@ Most of the LaunchAgents I call run scripts in my dropbox. Some of those are ava
 LaunchAgents will be copied to ~/Library/LaunchAgents, but will need to be manually enabled:
 
   launchctl load </path/to/file.plist>
+  
+Or, they should start automatically on the next login.
 
 == Caveats
 
