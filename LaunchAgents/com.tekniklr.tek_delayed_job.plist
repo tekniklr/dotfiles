@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>label</key>
+		<string>com.tekniklr.tek_delayed_job</string>
+
+		<key>WorkingDirectory</key>
+		<string>/Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com</string>
+
+		<key>ProgramArguments</key>
+		<array>
+			<string>cap</string>
+			<string>delayed_job:start</string>
+		</array>
+
+		<key>LowPriorityIO</key>
+		<true/>
+
+		<key>Nice</key>
+		<integer>1</integer>
+
+		<key>StartInterval</key>
+		<integer>3600</integer>
+
+	</dict>
+</plist>
