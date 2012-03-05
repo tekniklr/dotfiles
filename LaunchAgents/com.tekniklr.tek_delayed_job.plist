@@ -5,13 +5,9 @@
 		<key>label</key>
 		<string>com.tekniklr.tek_delayed_job</string>
 
-		<key>WorkingDirectory</key>
-		<string>/Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com</string>
-
 		<key>ProgramArguments</key>
 		<array>
-			<string>cap</string>
-			<string>delayed_job:start</string>
+			<string>/Users/tekniklr/Dropbox/programs/restart_tek_worker.sh</string>
 		</array>
 
 		<key>LowPriorityIO</key>
