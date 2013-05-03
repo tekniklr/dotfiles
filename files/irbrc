@@ -1,6 +1,15 @@
 # Require RubyGems by default.
 require 'rubygems'
 
+# try to use pry instead of irb
+begin
+  require "pry"
+  Pry.start
+  exit
+rescue LoadError => e
+  warn "=> Unable to load pry"
+end
+
 # better than .methods -> .ls
 require 'looksee'
 
