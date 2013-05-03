@@ -153,3 +153,10 @@ module CodeRay
         end
     end
 end
+
+# load rails in Rails 2 if it is running as a rails console
+if ENV.include?('RAILS_ENV')
+  require File.join(Dir.getwd, 'config', 'environment.rb')
+  require 'console_app'
+  require 'console_with_helpers'
+end
