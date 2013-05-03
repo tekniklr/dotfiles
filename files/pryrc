@@ -1,18 +1,31 @@
 Pry.config.editor = "subl"
 
-if defined?(Rails)
+# set prompt to something useful in rails
+if ENV.include?('RAILS_ENV') || defined?(Rails)
   Pry.config.prompt_name = "\e[35m#{File.basename(Dir.pwd)}\e[0m "
-  unless Rails.env.development?
-    Pry.config.prompt_name += "\e[31m#{Rails.env.upcase}\e[0m "
+  if ENV.include?('RAILS_ENV')
+    unless ENV['RAILS_ENV'] == 'development'
+      Pry.config.prompt_name += "\e[31m#{ENV['RAILS_ENV'].upcase}\e[0m "
+    end
+  elsif defined?(Rails)
+    unless Rails.env.development? 
+      Pry.config.prompt_name += "\e[31m#{Rails.env.upcase}\e[0m "
+    end
   end
 end
 
-if defined?(Rails) && Rails.respond_to?(:logger)
-  require 'logger'
-  Rails.logger = Logger.new($stdout)
-  ActiveRecord::Base.logger = Rails.logger
-elsif ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
+# log more usefully
+if ENV.include?('RAILS_ENV')
+  if !Object.const_defined?('RAILS_DEFAULT_LOGGER')
+    require 'logger'
+    Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
+  end
+# for rails 3
+elsif defined?(Rails) && !Rails.env.nil?
+  if Rails.logger
+    Rails.logger =Logger.new(STDOUT)
+    ActiveRecord::Base.logger = Rails.logger
+  end
 end
 
 default_command_set = Pry::CommandSet.new do
