@@ -22,9 +22,3 @@ alias updatedb='sudo /usr/libexec/locate.updatedb'
 # directory location aliases
 alias tekrails='cd /Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com'
 alias wptheme='cd /Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com/public/wpblog/wp-content/themes/tekniklr.com'
-
-# Load RVM function
-if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-  source "$HOME/.rvm/scripts/rvm"
-  rvm default
-fi
