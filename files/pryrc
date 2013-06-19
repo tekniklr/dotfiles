@@ -2,14 +2,14 @@ Pry.config.editor = "subl"
 
 # set prompt to something useful in rails
 if ENV.include?('RAILS_ENV') || defined?(Rails)
-  Pry.config.prompt_name = "\e[35m#{File.basename(Dir.pwd)}\e[0m "
+  Pry.config.prompt_name = "#{File.basename(Dir.pwd)} "
   if ENV.include?('RAILS_ENV')
     unless ENV['RAILS_ENV'] == 'development'
-      Pry.config.prompt_name += "\e[31m#{ENV['RAILS_ENV'].upcase}\e[0m "
+      Pry.config.prompt_name += "#{ENV['RAILS_ENV'].upcase} "
     end
   elsif defined?(Rails)
     unless Rails.env.development? 
-      Pry.config.prompt_name += "\e[31m#{Rails.env.upcase}\e[0m "
+      Pry.config.prompt_name += "#{Rails.env.upcase} "
     end
   end
 end
