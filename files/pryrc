@@ -170,3 +170,5 @@ if ENV.include?('RAILS_ENV')
   require 'console_app'
   require 'console_with_helpers'
 end
+
+ActiveRecord::Base.logger = Logger.new(STDOUT)
