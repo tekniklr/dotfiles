@@ -175,7 +175,7 @@ _update_row: (name, el) ->
 style: """
   // SET DESIRED POSITION AND FONT COLOR
   top 0px
-  left 510px
+  left 470px
   color white
   
   box-sizing border-box

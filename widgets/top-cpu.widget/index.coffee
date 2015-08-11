@@ -4,7 +4,7 @@ refreshFrequency: 2000
 
 style: """
   top: 0px
-  left: 50px
+  left: 10px
   color: #fff
   font-family: Helvetica Neue
 
