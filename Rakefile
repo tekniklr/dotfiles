@@ -15,6 +15,14 @@ task :install do
     agent.sub!('LaunchAgents/', '')
     determine_action(agent, "#{ENV['HOME']}/Library/LaunchAgents", false, lastmod)
   end
+  puts "Liking widgets..."
+  widget_target = "#{ENV['HOME']}/Library/Application Support/Übersicht/widgets"
+  if !File.exist?(widget_target)
+    system %Q{ln -s "#{ENV['PWD']}/widgets" "#{widget_target}"}
+    puts "\tdone!"
+  else
+    puts "\t#{widget_target} already present!"
+  end
 end
 
 def determine_action(file, target, hidden, lastmod)
