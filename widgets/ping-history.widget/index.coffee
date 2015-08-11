@@ -174,8 +174,8 @@ _update_row: (name, el) ->
 # (http://learnboost.github.io/stylus/)
 style: """
   // SET DESIRED POSITION AND FONT COLOR
-  top 10px
-  left 50px
+  top 0px
+  left 510px
   color white
   
   box-sizing border-box
