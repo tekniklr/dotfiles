@@ -13,8 +13,6 @@ export VISUAL='vim'
 # general purpose aliases
 alias rake='bundle exec rake'
 alias rails='bundle exec rails'
-alias git='/Users/tekniklr/Dropbox/programs/git_forks/git-achievements/git-achievements'
-alias pushgithub='git push -u origin master'
 alias grep='grep --color=auto -i'
 alias locate='locate -i'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
