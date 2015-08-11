@@ -21,9 +21,9 @@ Remove any files (LaunchAgents, etc) not applicable to the current system. Just 
 
 I have cloned .oh-my-zsh ( https://github.com/tekniklr/oh-my-zsh ), so that should also be checked out for a working shell.
 
-Most of the LaunchAgents I call run scripts in my dropbox. Some of those are available on git, some are system-specific backup scripts, so they aren't available.
-
 == OSX LaunchAgents
+
+Most of the LaunchAgents I call run scripts in my dropbox. Some of those are available on git, some are system-specific backup scripts, so they aren't available.
 
 LaunchAgents will be copied to ~/Library/LaunchAgents, but will need to be manually enabled:
 
