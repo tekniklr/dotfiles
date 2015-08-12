@@ -12,8 +12,8 @@ command: """
   #  domain3_name:ping: cannot resolve domain4_name: Unknown host
   
   ###  LIST YOUR DOMAINS HERE
-  declare -a domains=( reed.edu  google.com   tekniklr.com )
-  declare -a aliases=( reed      google       tekniklr.com )
+  declare -a domains=( google.com   tekniklr.com )
+  declare -a aliases=( google       tekniklr.com )
   ###  AND DON'T FORGET SHORT ALIASES
 
   for i in "${!domains[@]}"; do
