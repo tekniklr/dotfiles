@@ -14,7 +14,7 @@ refreshFrequency: 600000            # Update every 10 minutes
 
 style: """
   bottom : 15px
-  left   : 30px
+  left   : 15px
   width  : 360px
 
   font-family: Helvetica Neue
