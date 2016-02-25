@@ -16,8 +16,11 @@
     <key>Nice</key>
     <integer>1</integer>
 
-    <key>StartCalendarInterval</key>
+    <key>StartInterval</key>
     <integer>14400</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
 
   </dict>
 </plist>
