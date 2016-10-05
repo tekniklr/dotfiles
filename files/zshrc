@@ -16,6 +16,6 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(hostnames git bundler osx rbenv perl tekniklr colored-man-pages colorize command-not-found copydir brew thefuck)
+plugins=(computer_names git bundler osx rbenv perl tekniklr colored-man-pages colorize command-not-found copydir brew thefuck)
 
 source $ZSH/oh-my-zsh.sh
