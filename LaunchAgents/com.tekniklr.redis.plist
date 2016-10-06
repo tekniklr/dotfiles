@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.tekniklr.redis</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/local/bin/redis-server</string>
+      <string>/usr/local/etc/redis.conf</string>
+    </array>
+
+    <key>Nice</key>
+    <integer>1</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/tekniklr/.redis.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/tekniklr/.redis.log</string>
+
+  </dict>
+</plist>
