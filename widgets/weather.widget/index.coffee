@@ -2,7 +2,7 @@ options =
   city          : "Portland"       # default city in case location detection fails
   region        : "OR"              # default region in case location detection fails
   units         : 'c'               # c for celcius. f for Fahrenheit
-  staticLocation: false             # set to true to disable autmatic location lookup
+  staticLocation: true             # set to true to disable autmatic location lookup
 
 appearance =
   iconSet       : 'original'        # "original" for the original icons, or "yahoo" for yahoo icons
