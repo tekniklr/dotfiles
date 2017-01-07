@@ -164,13 +164,6 @@ class ShowModels < Pry::ClassCommand
 end
 Pry.config.commands.add_command ShowModels 
 
-# load rails in Rails 2 if it is running as a rails console
-if ENV.include?('RAILS_ENV')
-  require File.join(Dir.getwd, 'config', 'environment.rb')
-  require 'console_app'
-  require 'console_with_helpers'
-end
-
 Pry.config.exception_handler = proc do |output, exception, _pry_|
   output.puts "#{exception}"
   output.puts "#{exception.backtrace}"
