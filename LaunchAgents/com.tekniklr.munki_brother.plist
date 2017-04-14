@@ -22,5 +22,11 @@
     <key>RunAtLoad</key>
     <true/>
 
+    <key>StandardOutPath</key>
+    <string>/Users/tekniklr/.munki_brother.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/tekniklr/.munki_brother.log</string>
+
   </dict>
 </plist>
