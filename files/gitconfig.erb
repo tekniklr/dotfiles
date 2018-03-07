@@ -6,6 +6,7 @@
   token = <%= print("GitHub API Token: "); STDOUT.flush; STDIN.gets.chomp %>
 [alias]
   history = log --graph --abbrev-commit --decorate --date=relative --all
+  dad = !curl https://icanhazdadjoke.com/ && echo  && git add
 [push]
   default = simple
 [core]
