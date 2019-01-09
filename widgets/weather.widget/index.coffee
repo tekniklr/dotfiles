@@ -236,8 +236,6 @@ renderError: (data, message) ->
   @$domEl.children().hide()
 
   message ?= """
-     Could not retreive weather data for #{data.location}.
-      <p>Are you connected to the internet?</p>
   """
 
   @$domEl.append "<div class=\"error\">#{message}<div>"
