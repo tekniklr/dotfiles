@@ -7,7 +7,7 @@
 
     <key>ProgramArguments</key>
     <array>
-      <string>/Users/tekniklr/Documents/Work/bin/jamf_brother.rb</string>
+      <string>/Users/tekniklr/Work/bin/jamf_brother.rb</string>
     </array>
 
     <key>LowPriorityIO</key>
