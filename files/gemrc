@@ -1,1 +1,2 @@
 gem: --no-ri --no-rdoc
+:ipv4_fallback_enabled: true
