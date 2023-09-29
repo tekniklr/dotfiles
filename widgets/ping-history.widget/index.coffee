@@ -174,7 +174,7 @@ _update_row: (name, el) ->
 # (http://learnboost.github.io/stylus/)
 style: """
   // SET DESIRED POSITION AND FONT COLOR
-  top 0px
+  top 15px
   left 470px
   color white
   
