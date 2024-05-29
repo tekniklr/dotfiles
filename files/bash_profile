@@ -19,4 +19,3 @@ alias updatedb='sudo /usr/libexec/locate.updatedb'
 
 # directory location aliases
 alias tekrails='cd /Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com'
-alias wptheme='cd /Users/tekniklr/Documents/Web/tekniklr.com/tekniklr.com/public/wpblog/wp-content/themes/tekniklr.com'
