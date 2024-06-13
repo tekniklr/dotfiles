@@ -7,7 +7,7 @@ begin
   Pry.start
   exit
 rescue LoadError => e
-  warn "=> Unable to load pry"
+  # if this project doesn't have pry, that's fine
 end
 
 # better than .methods -> .ls
