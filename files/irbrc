@@ -10,67 +10,6 @@ rescue LoadError => e
   # if this project doesn't have pry, that's fine
 end
 
-# better than .methods -> .ls
-require 'looksee'
-
-# wirble, for pretty colors
-require 'wirble'
-colors = Wirble::Colorize.colors.merge({
-  :object_class => :black,
-  :class        => :dark_gray,
-  :symbol       => :red,
-  :symbol_prefix=> :blue,
-})
-Wirble::Colorize.colors = colors
-Wirble.init
-Wirble.colorize
-
-# output in columns
-require 'hirb'
-Hirb::View.enable
-
-# awesome_print
-require 'awesome_print'
-unless IRB.version.include?('DietRB')
-  IRB::Irb.class_eval do
-    def output_value
-      ap @context.last_value, 
-        :multiline => true,
-        :plain  => false,
-        :index => true,
-        :sort_keys => true,
-        :limit => false,
-        :indent => 2,
-        :color => {
-          :args       => :gray,
-          :array      => :gray,
-          :bigdecimal => :blue,
-          :class      => :yellow,
-          :date       => :greenish,
-          :falseclass => :red,
-          :fixnum     => :blue,
-          :float      => :blue,
-          :hash       => :black,
-          :keyword    => :cyan,
-          :method     => :purpleish,
-          :nilclass   => :red,
-          :string     => :purple,
-          :struct     => :black,
-          :symbol     => :cyanish,
-          :time       => :greenish,
-          :trueclass  => :green,
-          :variable   => :cyanish
-        }
-    end
-  end
-else # MacRuby
-  IRB.formatter = Class.new(IRB::Formatter) do
-    def inspect_object(object)
-      object.ai
-    end
-  end.new
-end
-
 # Activate auto-completion.
 require 'irb/completion'
 
